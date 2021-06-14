@@ -6,7 +6,7 @@ export const Container = styled.button<{
   variant: "primary" | "secondary";
   isCompact: boolean;
 }>`
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius};
   border: 0;
   font-family: inherit;
   padding: 10px ${({ isCompact }) => (isCompact ? "10px" : "20px")};
@@ -27,7 +27,7 @@ export const Container = styled.button<{
       color: ${color(background).isDark() ? "white" : "black"};
 
       :hover:not(:disabled) {
-        background: ${color(background).lightness(70).toString()};
+        background: ${color(background).darken(0.15).toString()};
       }
     `;
   }}

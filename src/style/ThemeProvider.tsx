@@ -5,6 +5,7 @@ const theme = {
   pageMaxWidth: "720px",
   backgroundColor: "#EBEBEB",
   primaryColor: "#707070",
+  borderRadius: "10px",
 };
 
 type ThemeProviderProps = {

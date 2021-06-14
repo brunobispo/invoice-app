@@ -5,5 +5,6 @@ declare module "styled-components" {
     pageMaxWidth: string;
     backgroundColor: string;
     primaryColor: string;
+    borderRadius: string;
   }
 }
