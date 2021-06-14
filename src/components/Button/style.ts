@@ -4,11 +4,12 @@ import color from "color";
 export const Container = styled.button<{
   isGroup: boolean;
   variant: "primary" | "secondary";
+  isCompact: boolean;
 }>`
   border-radius: 10px;
   border: 0;
   font-family: inherit;
-  padding: 10px;
+  padding: 10px ${({ isCompact }) => (isCompact ? "10px" : "20px")};
   font-weight: 500;
 
   :disabled {
@@ -23,6 +24,7 @@ export const Container = styled.button<{
 
     return css`
       background: ${background};
+      color: ${color(background).isDark() ? "white" : "black"};
 
       :hover:not(:disabled) {
         background: ${color(background).lightness(70).toString()};

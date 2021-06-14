@@ -4,7 +4,7 @@ import { ThemeProvider as StyledThemeProvider } from "styled-components";
 const theme = {
   pageMaxWidth: "720px",
   backgroundColor: "#EBEBEB",
-  primaryColor: "#000",
+  primaryColor: "#707070",
 };
 
 type ThemeProviderProps = {

@@ -16,19 +16,21 @@ const DateButton = ({ date, onChange }: DateButtonProps) => (
     <Button
       variant="secondary"
       isGroup
+      isCompact
       onClick={() => onChange(addMonths(date, -1))}
       aria-label="Previous Month"
     >
       {"<"}
     </Button>
 
-    <Button variant="secondary" isGroup disabled>
+    <Button variant="secondary" isGroup isCompact disabled>
       {date.toLocaleString("en-US", { month: "long", year: "numeric" })}
     </Button>
 
     <Button
       variant="secondary"
       isGroup
+      isCompact
       onClick={() => onChange(addMonths(date, 1))}
       aria-label="Next Month"
     >

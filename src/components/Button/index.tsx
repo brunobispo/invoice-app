@@ -5,16 +5,18 @@ import { Container } from "./style";
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   className?: string;
   onClick?: () => void;
-  isGroup: boolean;
-  variant: "primary" | "secondary";
+  isGroup?: boolean;
+  isCompact?: boolean;
+  variant?: "primary" | "secondary";
 };
 
 const Button = ({
   children,
   className,
   onClick,
-  isGroup,
-  variant,
+  isGroup = false,
+  isCompact = false,
+  variant = "primary",
   disabled,
   ...props
 }: ButtonProps) => (
@@ -24,6 +26,7 @@ const Button = ({
     isGroup={isGroup}
     variant={variant}
     disabled={disabled}
+    isCompact={isCompact}
     {...props}
   >
     {children}
