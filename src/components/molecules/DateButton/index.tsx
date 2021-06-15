@@ -1,4 +1,4 @@
-import Button from "../Button";
+import Button from "components/atoms/Button";
 
 function addMonths(date: Date, months: number) {
   const newDate = new Date(date.getTime());

@@ -29,6 +29,10 @@ export const Container = styled.button<{
       :hover:not(:disabled) {
         background: ${color(background).darken(0.15).toString()};
       }
+
+      :active:not(:disabled) {
+        background: ${color(background).darken(0.3).toString()};
+      }
     `;
   }}
 

@@ -1,6 +1,6 @@
 import { InvoiceType } from "types";
-import StatusText from "components/StatusText";
-import AmountText from "components/AmountText";
+import StatusText from "components/atoms/StatusText";
+import AmountText from "components/atoms/AmountText";
 
 import { Container, Item } from "./style";
 

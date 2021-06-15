@@ -7,5 +7,8 @@ declare module "styled-components" {
     primaryColor: string;
     borderRadius: string;
     paperColor: string;
+    paidColor: string;
+    refundedColor: string;
+    pendingColor: string;
   }
 }

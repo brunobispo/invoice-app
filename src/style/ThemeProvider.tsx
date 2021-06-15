@@ -6,7 +6,10 @@ const theme = {
   backgroundColor: "#EBEBEB",
   primaryColor: "#707070",
   borderRadius: "10px",
-  paperColor: "#FFF"
+  paperColor: "#FFF",
+  paidColor: "#55C000",
+  refundedColor: "#B30000",
+  pendingColor: "#B8B8B8",
 };
 
 type ThemeProviderProps = {
