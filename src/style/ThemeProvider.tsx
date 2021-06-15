@@ -6,6 +6,7 @@ const theme = {
   backgroundColor: "#EBEBEB",
   primaryColor: "#707070",
   borderRadius: "10px",
+  paperColor: "#FFF"
 };
 
 type ThemeProviderProps = {

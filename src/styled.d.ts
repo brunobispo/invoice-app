@@ -6,5 +6,6 @@ declare module "styled-components" {
     backgroundColor: string;
     primaryColor: string;
     borderRadius: string;
+    paperColor: string;
   }
 }
