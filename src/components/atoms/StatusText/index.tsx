@@ -1,4 +1,4 @@
-import { InvoiceType } from "../../../types";
+import { InvoiceType } from "types";
 import { Container } from "./style";
 
 function getStatus(amount: number, isPaid: boolean): string {

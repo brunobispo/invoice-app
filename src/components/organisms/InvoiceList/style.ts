@@ -12,7 +12,7 @@ export const Title = styled.span`
 
 export const Header = styled.header`
   display: grid;
-  grid-template-columns: 100px 100px auto 100px 100px;
+  grid-template-columns: 100px 100px auto 100px 100px 15px;
   gap: 5px;
   padding: 0 25px;
   margin-bottom: 15px;
