@@ -8,7 +8,7 @@ export const Container = styled.li`
   }
 `;
 
-export const Panel = styled.li<{ isElevated: boolean }>`
+export const Panel = styled.div<{ isElevated: boolean }>`
   display: grid;
   position: relative;
   grid-template-columns: 110px 100px auto 100px 100px 15px;
@@ -26,5 +26,3 @@ export const Panel = styled.li<{ isElevated: boolean }>`
       box-shadow: ${({ theme }) => theme.boxShadow};
     `}
 `;
-
-
