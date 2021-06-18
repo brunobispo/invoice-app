@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import Container from "components/atoms/Container";
+import Section from "components/atoms/Section";
 import DateButton from "components/molecules/DateButton";
 import Button from "components/atoms/Button";
 import InvoiceList from "components/organisms/InvoiceList";
@@ -36,23 +36,23 @@ const Dashboard = ({
   onChangeMonth,
 }: DashboardProps) => (
   <>
-    <Container>
+    <Section>
       <DateButton date={currentMonth} onChange={onChangeMonth} />
-    </Container>
-    <Container>
+    </Section>
+    <Section>
       <TotalSummary
         total={total}
         pending={pending}
         paid={paid}
         refunded={refunded}
       />
-    </Container>
-    <Container>
+    </Section>
+    <Section alignItems="right">
       <Button>+ Create Invoice</Button>
-    </Container>
-    <Container>
+    </Section>
+    <Section>
       <InvoiceList items={items} />
-    </Container>
+    </Section>
   </>
 );
 
