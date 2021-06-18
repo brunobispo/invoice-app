@@ -1,6 +1,7 @@
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
-import { Container, Backdrop } from "./style";
+import { Container } from "./style";
+import Backdrop from "components/atoms/Backdrop";
 
 type MenuProps = {
   children: React.ReactNode;

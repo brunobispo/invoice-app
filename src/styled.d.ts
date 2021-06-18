@@ -10,5 +10,6 @@ declare module "styled-components" {
     paidColor: string;
     refundedColor: string;
     pendingColor: string;
+    boxShadow: string;
   }
 }

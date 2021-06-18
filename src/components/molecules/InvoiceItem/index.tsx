@@ -1,38 +1,48 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 
 import { InvoiceType } from "types";
 import AmountText from "components/atoms/AmountText";
-import MoreButton from "components/atoms/MoreButton";
 import StatusText from "components/atoms/StatusText";
-import MenuItem from "components/molecules/MenuItem";
-import Menu from "components/organisms/Menu";
+import Backdrop from "components/atoms/Backdrop";
+import Cell from "components/atoms/Cell";
+import InvoiceMenu from "components/organisms/InvoiceMenu";
+import InvoiceForm from "components/organisms/InvoiceForm";
+import date from "helpers/date";
 
-import { Container, Item } from "./style";
+import { Container, Panel } from "./style";
 
 const InvoiceItem = ({ creation, id, client, amount, isPaid }: InvoiceType) => {
-  const button = useRef<HTMLButtonElement>(null);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
 
   return (
-    <Container isOpen={isOpen}>
-      <Item aria-label="Date">
-        {creation.toLocaleString("en-US", { day: "2-digit", month: "short" })}
-      </Item>
-      <Item aria-label="Id">{id.substr(0, 7)}</Item>
-      <Item aria-label="Client">{client}</Item>
-      <Item aria-label="Amount">
-        <AmountText amount={amount} />
-      </Item>
-      <Item aria-label="Status">
-        <StatusText amount={amount} isPaid={isPaid} />
-      </Item>
+    <Container>
+      {isEditing && <Backdrop onClick={() => setIsEditing(false)} />}
 
-      <MoreButton ref={button} onClick={() => setIsOpen(true)} />
-      <Menu isOpen={isOpen} anchor={button} onClose={() => setIsOpen(false)}>
-        {!isPaid && <MenuItem>Mark as {amount > 0 ? "paid" : "refunded"}</MenuItem>}
-        {isPaid && amount > 0 && <MenuItem>Refund</MenuItem>}
-        <MenuItem isDanger>Delete</MenuItem>
-      </Menu>
+      <Panel isElevated={isEditing}>
+        {!isEditing ? (
+          <>
+            <Cell aria-label="Date">{date(creation)}</Cell>
+            <Cell aria-label="Id">{id.substr(0, 7)}</Cell>
+            <Cell aria-label="Client">{client}</Cell>
+            <Cell aria-label="Amount">
+              <AmountText amount={amount} />
+            </Cell>
+            <Cell aria-label="Status">
+              <StatusText amount={amount} isPaid={isPaid} />
+            </Cell>
+            <InvoiceMenu
+              amount={amount}
+              isPaid={isPaid}
+              onEdit={() => setIsEditing(true)}
+            />
+          </>
+        ) : (
+          <InvoiceForm
+            initialData={{ creation, id, client, amount, isPaid }}
+            onSubmit={console.log}
+          />
+        )}
+      </Panel>
     </Container>
   );
 };

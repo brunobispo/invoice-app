@@ -1,5 +1,6 @@
+import IconButton from "components/atoms/IconButton";
+import { ReactComponent as Icon } from "./icon.svg";
 import { forwardRef } from "react";
-import { Container, Label } from "./style";
 
 type MoreButtonProps = {
   onClick: () => void;
@@ -7,9 +8,9 @@ type MoreButtonProps = {
 
 const MoreButton = forwardRef<HTMLButtonElement, MoreButtonProps>(
   ({ onClick }, ref) => (
-    <Container ref={ref} onClick={onClick}>
-      <Label>…</Label>
-    </Container>
+    <IconButton ref={ref} onClick={onClick}>
+      <Icon width={12} height={12} />
+    </IconButton>
   )
 );
 
