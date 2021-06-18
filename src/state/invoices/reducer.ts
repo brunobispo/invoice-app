@@ -6,6 +6,7 @@ import {
   editInvoice,
   markInvoiceAsPaid,
   newInvoice,
+  refundInvoice,
   saveInvoice,
 } from "./actions";
 import isoDate from "helpers/isoDate";
@@ -51,7 +52,7 @@ const initialState: InvoicesState = {
 
 export default createReducer(initialState, (builder) => {
   builder.addCase(newInvoice, (state, { payload }) => {
-    state.creating = payload
+    state.creating = payload;
   });
 
   builder.addCase(editInvoice, (state, { payload }) => {
@@ -75,5 +76,10 @@ export default createReducer(initialState, (builder) => {
 
   builder.addCase(markInvoiceAsPaid, (state, { payload }) => {
     state.list[payload].isPaid = true;
+  });
+
+  builder.addCase(refundInvoice, (state, { payload }) => {
+    state.list[payload].amount *= -1;
+    state.list[payload].isPaid = false;
   });
 });

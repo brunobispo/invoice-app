@@ -13,3 +13,4 @@ export const editInvoice = createAction<string>("invoices/edit");
 export const cancelInvoice = createAction("invoices/cancel");
 export const deleteInvoice = createAction<string>("invoices/delete");
 export const markInvoiceAsPaid = createAction<string>("invoices/markAsPaid");
+export const refundInvoice = createAction<string>("invoices/refundInvoice");
