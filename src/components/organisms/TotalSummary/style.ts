@@ -4,13 +4,14 @@ export const Container = styled.ul`
   background: ${({ theme }) => theme.paperColor};
   border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
-  justify-content: space-between;
   align-items: center;
   padding: 25px;
   margin: 0;
 `;
 
 export const Item = styled.li`
+  flex: 1;
+  padding: 0 10px;
   list-style: none;
   text-align: center;
 `;
