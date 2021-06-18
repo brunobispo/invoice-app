@@ -56,6 +56,7 @@ export default createReducer(initialState, (builder) => {
   });
 
   builder.addCase(editInvoice, (state, { payload }) => {
+    state.creating = null;
     state.editingId = payload;
   });
 
