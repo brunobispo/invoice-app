@@ -1,4 +1,10 @@
-const date = (value: string) =>
-  new Date(value).toLocaleString("en-US", { day: "2-digit", month: "short" });
+const date = (value: string) => {
+  const parsed = new Date(value);
+  return new Date(
+    parsed.getUTCFullYear(),
+    parsed.getUTCMonth(),
+    parsed.getUTCDate()
+  ).toLocaleString("en-US", { day: "2-digit", month: "short" });
+};
 
 export default date;
