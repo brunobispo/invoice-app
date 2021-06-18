@@ -51,7 +51,7 @@ const initialState: InvoicesState = {
 
 export default createReducer(initialState, (builder) => {
   builder.addCase(newInvoice, (state, { payload }) => {
-    state.creating = { id: payload.id };
+    state.creating = payload
   });
 
   builder.addCase(editInvoice, (state, { payload }) => {

@@ -15,6 +15,8 @@ import {
   getCurrentMonthTotal,
 } from "state/dashboard/selectors";
 import { setCurrentMonth } from "state/dashboard";
+import { newInvoice } from "state/invoices";
+import isoDate from "helpers/isoDate";
 
 type DashboardProps = {
   total: number;
@@ -24,6 +26,7 @@ type DashboardProps = {
   items: InvoiceType[];
   currentMonth: Date;
   onChangeMonth: (date: Date) => void;
+  onCreateInvoice: (date: Date) => void;
 };
 
 const Dashboard = ({
@@ -34,6 +37,7 @@ const Dashboard = ({
   items,
   currentMonth,
   onChangeMonth,
+  onCreateInvoice,
 }: DashboardProps) => (
   <>
     <Section>
@@ -48,7 +52,9 @@ const Dashboard = ({
       />
     </Section>
     <Section alignItems="right">
-      <Button>+ Create Invoice</Button>
+      <Button onClick={() => onCreateInvoice(currentMonth)}>
+        + Create Invoice
+      </Button>
     </Section>
     <Section>
       <InvoiceList items={items} />
@@ -67,6 +73,8 @@ const mapStateToProps = (state: RootState) => ({
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onChangeMonth: (date: Date) => dispatch(setCurrentMonth(date)),
+  onCreateInvoice: (date: Date) =>
+    dispatch(newInvoice({ creation: isoDate(date.toISOString()) })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
