@@ -5,7 +5,7 @@ import AmountText from "components/atoms/AmountText";
 import StatusText from "components/atoms/StatusText";
 import Cell from "components/atoms/Cell";
 import InvoicePane from "components/molecules/InvoicePane";
-import InvoiceMenu from "components/organisms/InvoiceMenu";
+import InvoiceMenu from "components/molecules/InvoiceMenu";
 import date from "helpers/date";
 import { RootState } from "state/store";
 

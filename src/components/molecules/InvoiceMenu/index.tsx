@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { InvoiceType } from "types";
 import MoreButton from "components/molecules/MoreButton";
 import MenuItem from "components/molecules/MenuItem";
-import Menu from "components/organisms/Menu";
+import Menu from "components/molecules/Menu";
 import { RootState, AppDispatch } from "state/store";
 import { editInvoice } from "state/invoices";
 

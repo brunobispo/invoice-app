@@ -1,8 +1,8 @@
 import * as React from "react";
 import { InvoiceType } from "types";
 import { AppDispatch, RootState } from "state/store";
-import InvoiceItem from "components/molecules/InvoiceItem";
-import InvoiceForm from "components/molecules/InvoiceForm";
+import InvoiceItem from "components/organisms/InvoiceItem";
+import InvoiceForm from "components/organisms/InvoiceForm";
 
 import { Container, Title, Header } from "./style";
 import { connect } from "react-redux";
