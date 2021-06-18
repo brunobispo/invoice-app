@@ -6,12 +6,18 @@ import MoreButton from "components/molecules/MoreButton";
 import MenuItem from "components/molecules/MenuItem";
 import Menu from "components/molecules/Menu";
 import { RootState, AppDispatch } from "state/store";
-import { editInvoice, markInvoiceAsPaid, refundInvoice } from "state/invoices";
+import {
+  deleteInvoice,
+  editInvoice,
+  markInvoiceAsPaid,
+  refundInvoice,
+} from "state/invoices";
 
 type InvoiceMenuProps = Pick<InvoiceType, "id" | "amount" | "isPaid"> & {
   onEdit: () => void;
   onRefund: () => void;
   onMarkAsPaid: () => void;
+  onDelete: () => void;
 };
 
 const InvoiceMenu = ({
@@ -20,6 +26,7 @@ const InvoiceMenu = ({
   onEdit,
   onRefund,
   onMarkAsPaid,
+  onDelete,
 }: InvoiceMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const ellipse = useRef<HTMLButtonElement>(null);
@@ -56,7 +63,13 @@ const InvoiceMenu = ({
         >
           Edit
         </MenuItem>
-        <MenuItem onClick={() => setIsOpen(false)} isDanger>
+        <MenuItem
+          onClick={() => {
+            setIsOpen(false);
+            onDelete();
+          }}
+          isDanger
+        >
           Delete
         </MenuItem>
       </Menu>
@@ -83,6 +96,7 @@ const mapDispatchToProps = (
   onEdit: () => dispatch(editInvoice(ownProps.id)),
   onMarkAsPaid: () => dispatch(markInvoiceAsPaid(ownProps.id)),
   onRefund: () => dispatch(refundInvoice(ownProps.id)),
+  onDelete: () => dispatch(deleteInvoice(ownProps.id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(InvoiceMenu);
