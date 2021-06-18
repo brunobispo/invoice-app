@@ -43,6 +43,7 @@ const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
   return (
     <InvoicePane isElevated onClose={onCancel}>
       <Input
+        autoFocus
         type="date"
         placeholder="Date"
         value={data.creation}
