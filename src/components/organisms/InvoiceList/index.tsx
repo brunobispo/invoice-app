@@ -25,13 +25,15 @@ const InvoiceList = ({
 }: InvoiceListProps) => {
   return (
     <Container>
-      <Header aria-hidden>
-        <Title>Date</Title>
-        <Title>Id</Title>
-        <Title>Client</Title>
-        <Title>Amount</Title>
-        <Title>Status</Title>
-      </Header>
+      {(items.length > 0 || creating) && (
+        <Header aria-hidden>
+          <Title>Date</Title>
+          <Title>Id</Title>
+          <Title>Client</Title>
+          <Title>Amount</Title>
+          <Title>Status</Title>
+        </Header>
+      )}
 
       {creating && (
         <InvoiceForm
