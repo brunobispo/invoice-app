@@ -39,7 +39,7 @@ const InvoiceItem = ({ creation, id, client, amount, isPaid }: InvoiceType) => {
         ) : (
           <InvoiceForm
             initialData={{ creation, id, client, amount, isPaid }}
-            onSubmit={console.log}
+            onSubmit={() => setIsEditing(false)}
           />
         )}
       </Panel>
