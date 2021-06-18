@@ -5,8 +5,12 @@ import { getInvoices } from "state/invoices/selectors";
 export const getCurrentMonth = (state: RootState) =>
   new Date(state.dashboard.currentMonth);
 
+export const getSortedInvoices = createSelector([getInvoices], (invoices) =>
+  invoices.sort((a, b) => (a.creation > b.creation ? -1 : 1))
+);
+
 export const getCurrentMonthInvoices = createSelector(
-  [getCurrentMonth, getInvoices],
+  [getCurrentMonth, getSortedInvoices],
   (currentMonth, invoices) =>
     invoices.filter(
       (invoice) =>
