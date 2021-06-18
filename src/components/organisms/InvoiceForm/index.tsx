@@ -12,43 +12,32 @@ type InvoiceFormProps = {
   onCancel: () => void;
 };
 
-type Data = {
-  id?: string;
-  creation?: string;
-  client?: string;
-  amount?: string;
-  isPaid?: string;
-};
-
-function isValid(form: Data): form is Required<Data> {
-  return Boolean(
-    form.id &&
-      form.client &&
-      form.creation &&
-      form.client &&
-      form.amount &&
-      parseFloat(form.amount)
-  );
-}
-
 const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
-  const [data, setData] = useState<Data>(() => ({
-    id: initialData.id,
-    creation: initialData.creation && isoDate(initialData.creation),
-    client: initialData.client,
-    amount: initialData.amount?.toString(),
+  const [data, setData] = useState(() => ({
+    id: initialData.id ?? "",
+    creation: (initialData.creation && isoDate(initialData.creation)) ?? "",
+    client: initialData.client ?? "",
+    amount: initialData.amount?.toString() ?? "",
     isPaid: initialData.isPaid ? "1" : "0",
   }));
 
+  const isValid = Boolean(
+    data.id &&
+      data.client &&
+      data.creation &&
+      data.client &&
+      data.amount &&
+      parseFloat(data.amount)
+  );
+
   const handleSubmit = () => {
-    if (isValid(data))
-      onSubmit({
-        id: data.id,
-        client: data.client,
-        creation: data.creation,
-        amount: parseFloat(data.amount),
-        isPaid: data.isPaid === "1",
-      });
+    onSubmit({
+      id: data.id,
+      client: data.client,
+      creation: data.creation,
+      amount: parseFloat(data.amount),
+      isPaid: data.isPaid === "1",
+    });
   };
 
   return (
@@ -92,7 +81,7 @@ const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
         </option>
       </Select>
 
-      <SaveButton onClick={handleSubmit} disabled={!isValid(data)} />
+      <SaveButton onClick={handleSubmit} disabled={!isValid} />
     </InvoicePane>
   );
 };
