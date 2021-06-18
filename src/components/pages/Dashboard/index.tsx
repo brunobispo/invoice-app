@@ -7,6 +7,7 @@ import TotalSummary from "components/organisms/TotalSummary";
 import { InvoiceType } from "types";
 import { RootState, AppDispatch } from "state/store";
 import {
+  getCurrentMonth,
   getCurrentMonthInvoices,
   getCurrentMonthPaid,
   getCurrentMonthPending,
@@ -61,7 +62,7 @@ const mapStateToProps = (state: RootState) => ({
   pending: getCurrentMonthPending(state),
   refunded: getCurrentMonthRefunded(state),
   paid: getCurrentMonthPaid(state),
-  currentMonth: state.dashboard.currentMonth,
+  currentMonth: getCurrentMonth(state),
 });
 
 const mapDispatchToProps = (dispatch: AppDispatch) => ({

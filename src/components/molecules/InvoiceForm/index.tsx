@@ -4,37 +4,55 @@ import { Input, Select } from "./style";
 import isoDate from "helpers/isoDate";
 import { useState } from "react";
 import SaveButton from "components/molecules/SaveButton";
+import InvoicePane from "components/molecules/InvoicePane";
 
 type InvoiceFormProps = {
-  initialData: InvoiceType;
+  initialData: Partial<InvoiceType>;
   onSubmit: (data: InvoiceType) => void;
+  onCancel: () => void;
 };
 
-const InvoiceForm = ({ initialData, onSubmit }: InvoiceFormProps) => {
-  const [data, setData] = useState(() => ({
+type Data = {
+  id?: string;
+  creation?: string;
+  client?: string;
+  amount?: string;
+  isPaid?: string;
+};
+
+function isValid(form: Data): form is Required<Data> {
+  return Boolean(
+    form.id &&
+      form.client &&
+      form.creation &&
+      form.client &&
+      form.amount &&
+      parseFloat(form.amount)
+  );
+}
+
+const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
+  const [data, setData] = useState<Data>(() => ({
     id: initialData.id,
-    creation: isoDate(initialData.creation),
+    creation: initialData.creation && isoDate(initialData.creation),
     client: initialData.client,
-    amount: initialData.amount.toString(),
+    amount: initialData.amount?.toString(),
     isPaid: initialData.isPaid ? "1" : "0",
   }));
 
-  const isValid = Boolean(
-    data.creation && data.client && parseFloat(data.amount)
-  );
-
   const handleSubmit = () => {
-    onSubmit({
-      id: data.id,
-      client: data.client,
-      creation: new Date(data.creation),
-      amount: parseFloat(data.amount),
-      isPaid: data.isPaid === "1",
-    });
+    if (isValid(data))
+      onSubmit({
+        id: data.id,
+        client: data.client,
+        creation: data.creation,
+        amount: parseFloat(data.amount),
+        isPaid: data.isPaid === "1",
+      });
   };
 
   return (
-    <>
+    <InvoicePane isElevated onClose={onCancel}>
       <Input
         type="date"
         placeholder="Date"
@@ -43,7 +61,7 @@ const InvoiceForm = ({ initialData, onSubmit }: InvoiceFormProps) => {
           setData((data) => ({ ...data, creation: event.target.value }))
         }
       />
-      <Cell aria-label="Id">{data.id.substr(0, 7)}</Cell>
+      <Cell aria-label="Id">{data.id?.substr(0, 7)}</Cell>
       <Input
         type="text"
         placeholder="Client"
@@ -70,12 +88,12 @@ const InvoiceForm = ({ initialData, onSubmit }: InvoiceFormProps) => {
       >
         <option value={0}>Pending</option>
         <option value={1}>
-          {parseFloat(data.amount) > 0 ? "Paid" : "Refunded"}
+          {!data.amount || parseFloat(data.amount) > 0 ? "Paid" : "Refunded"}
         </option>
       </Select>
 
-      <SaveButton onClick={handleSubmit} disabled={!isValid} />
-    </>
+      <SaveButton onClick={handleSubmit} disabled={!isValid(data)} />
+    </InvoicePane>
   );
 };
 

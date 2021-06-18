@@ -3,34 +3,36 @@ import { createReducer } from "@reduxjs/toolkit";
 import {
   cancelInvoice,
   deleteInvoice,
+  editInvoice,
   markInvoiceAsPaid,
   newInvoice,
   saveInvoice,
 } from "./actions";
+import isoDate from "helpers/isoDate";
 
 type InvoicesState = {
   list: { [key: string]: InvoiceType };
-  creating: InvoiceType["id"] | null;
-  editing: InvoiceType | null;
+  creating: Partial<InvoiceType> | null;
+  editingId: InvoiceType["id"] | null;
 };
 
 const items = [
   {
-    creation: new Date(),
+    creation: isoDate(new Date().toISOString()),
     client: "Bruno Bispo",
     id: "bf67e1af6346e6a15318553a35d3a828941d552d",
     amount: 23.32,
     isPaid: false,
   },
   {
-    creation: new Date(),
+    creation: isoDate(new Date().toISOString()),
     client: "Bruno Bispo",
     id: "cf67e1af6346e6a15318553a35d3a828941d552d",
     amount: 23.32,
     isPaid: true,
   },
   {
-    creation: new Date(),
+    creation: isoDate(new Date().toISOString()),
     client: "Bruno Bispo",
     id: "ff67e1af6346e6a15318553a35d3a828941d552d",
     amount: -23.32,
@@ -43,22 +45,28 @@ const initialState: InvoicesState = {
     map[item.id] = item;
     return map;
   }, {}),
-  editing: null,
+  editingId: null,
   creating: null,
 };
 
 export default createReducer(initialState, (builder) => {
   builder.addCase(newInvoice, (state, { payload }) => {
-    state.creating = payload.id;
+    state.creating = { id: payload.id };
+  });
+
+  builder.addCase(editInvoice, (state, { payload }) => {
+    state.editingId = payload;
   });
 
   builder.addCase(saveInvoice, (state, { payload }) => {
     state.list[payload.id] = payload;
+    state.editingId = null;
+    state.creating = null;
   });
 
   builder.addCase(cancelInvoice, (state) => {
     state.creating = null;
-    state.editing = null;
+    state.editingId = null;
   });
 
   builder.addCase(deleteInvoice, (state, { payload }) => {

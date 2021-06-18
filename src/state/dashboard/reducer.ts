@@ -2,11 +2,11 @@ import { createReducer } from "@reduxjs/toolkit";
 import { setCurrentMonth } from "./actions";
 
 type DashboardState = {
-  currentMonth: Date;
+  currentMonth: string;
 };
 
 const initialState: DashboardState = {
-  currentMonth: new Date(),
+  currentMonth: new Date().toISOString(),
 };
 
 export default createReducer(initialState, (builder) => {

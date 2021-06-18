@@ -7,6 +7,6 @@ export const newInvoice = createAction("invoices/new", () => ({
 }));
 export const saveInvoice = createAction<InvoiceType>("invoices/save");
 export const editInvoice = createAction<string>("invoices/edit");
-export const cancelInvoice = createAction<string>("invoices/cancel");
+export const cancelInvoice = createAction("invoices/cancel");
 export const deleteInvoice = createAction<string>("invoices/delete");
 export const markInvoiceAsPaid = createAction<string>("invoices/markAsPaid");

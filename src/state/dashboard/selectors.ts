@@ -2,13 +2,17 @@ import { createSelector } from "@reduxjs/toolkit";
 import { RootState } from "state/store";
 import { getInvoices } from "state/invoices/selectors";
 
+export const getCurrentMonth = (state: RootState) =>
+  new Date(state.dashboard.currentMonth);
+
 export const getCurrentMonthInvoices = createSelector(
-  [(state: RootState) => state.dashboard.currentMonth, getInvoices],
+  [getCurrentMonth, getInvoices],
   (currentMonth, invoices) =>
     invoices.filter(
       (invoice) =>
-        invoice.creation.getFullYear() === currentMonth.getFullYear() &&
-        invoice.creation.getMonth() === currentMonth.getMonth()
+        new Date(invoice.creation).getFullYear() ===
+          currentMonth.getFullYear() &&
+        new Date(invoice.creation).getMonth() === currentMonth.getMonth()
     )
 );
 

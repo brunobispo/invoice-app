@@ -1,50 +1,40 @@
-import { useState } from "react";
+import { connect } from "react-redux";
 
 import { InvoiceType } from "types";
 import AmountText from "components/atoms/AmountText";
 import StatusText from "components/atoms/StatusText";
-import Backdrop from "components/atoms/Backdrop";
 import Cell from "components/atoms/Cell";
+import InvoicePane from "components/molecules/InvoicePane";
 import InvoiceMenu from "components/organisms/InvoiceMenu";
-import InvoiceForm from "components/organisms/InvoiceForm";
 import date from "helpers/date";
+import { RootState } from "state/store";
 
-import { Container, Panel } from "./style";
+const InvoiceItem = ({ creation, id, client, amount, isPaid }: InvoiceType) => (
+  <InvoicePane>
+    <Cell aria-label="Date">{date(creation)}</Cell>
+    <Cell aria-label="Id">{id.substr(0, 7)}</Cell>
+    <Cell aria-label="Client">{client}</Cell>
+    <Cell aria-label="Amount">
+      <AmountText amount={amount} />
+    </Cell>
+    <Cell aria-label="Status">
+      <StatusText amount={amount} isPaid={isPaid} />
+    </Cell>
+    <InvoiceMenu id={id} />
+  </InvoicePane>
+);
 
-const InvoiceItem = ({ creation, id, client, amount, isPaid }: InvoiceType) => {
-  const [isEditing, setIsEditing] = useState(false);
-
-  return (
-    <Container>
-      {isEditing && <Backdrop onClick={() => setIsEditing(false)} />}
-
-      <Panel isElevated={isEditing}>
-        {!isEditing ? (
-          <>
-            <Cell aria-label="Date">{date(creation)}</Cell>
-            <Cell aria-label="Id">{id.substr(0, 7)}</Cell>
-            <Cell aria-label="Client">{client}</Cell>
-            <Cell aria-label="Amount">
-              <AmountText amount={amount} />
-            </Cell>
-            <Cell aria-label="Status">
-              <StatusText amount={amount} isPaid={isPaid} />
-            </Cell>
-            <InvoiceMenu
-              amount={amount}
-              isPaid={isPaid}
-              onEdit={() => setIsEditing(true)}
-            />
-          </>
-        ) : (
-          <InvoiceForm
-            initialData={{ creation, id, client, amount, isPaid }}
-            onSubmit={() => setIsEditing(false)}
-          />
-        )}
-      </Panel>
-    </Container>
-  );
+type ConnectedInvoiceItemProps = {
+  id: InvoiceType["id"];
 };
 
-export default InvoiceItem;
+const mapStateToProps = (
+  state: RootState,
+  ownProps: ConnectedInvoiceItemProps
+) => {
+  const { creation, id, client, amount, isPaid } =
+    state.invoices.list[ownProps.id];
+  return { creation, id, client, amount, isPaid };
+};
+
+export default connect(mapStateToProps)(InvoiceItem);
