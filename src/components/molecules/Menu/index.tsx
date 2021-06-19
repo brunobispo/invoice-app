@@ -22,7 +22,10 @@ const Menu = ({ children, isOpen, onClose, anchor }: MenuProps) => {
     ? createPortal(
         <>
           <Backdrop onClick={onClose} />
-          <Container y={rect.top} x={rect.left}>
+          <Container
+            y={window.scrollY + rect.top}
+            x={window.scrollX + rect.left}
+          >
             {children}
           </Container>
         </>,
