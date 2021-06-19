@@ -14,7 +14,7 @@ function shuffle(values: any[]) {
 for (let i = 0; i < 100; i++) {
   const id = uuid();
   const client = `${shuffle(firstNames)} ${shuffle(lastNames)}`;
-  const amount = Math.random() * 5000 - 2500;
+  const amount = Math.round((Math.random() * 500 - 250) * 100) / 100;
   const isPaid = shuffle([true, false]);
   const creation = isoDate.format(
     new Date(

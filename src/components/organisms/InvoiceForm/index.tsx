@@ -25,8 +25,6 @@ const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
     isPaid: initialData.isPaid ? "1" : "0",
   }));
 
-  console.log(data.creation, shortDate.parse(data.creation));
-
   const isValid = Boolean(
     data.id &&
       data.client &&
