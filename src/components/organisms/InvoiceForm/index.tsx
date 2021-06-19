@@ -1,10 +1,11 @@
 import { InvoiceType } from "types";
 import Cell from "components/atoms/Cell";
 import { Input, Select } from "./style";
-import isoDate from "helpers/isoDate";
 import { useState } from "react";
 import SaveButton from "components/molecules/SaveButton";
 import InvoicePane from "components/molecules/InvoicePane";
+import * as isoDate from "helpers/isoDate";
+import * as shortDate from "helpers/shortDate";
 
 type InvoiceFormProps = {
   initialData: Partial<InvoiceType>;
@@ -15,16 +16,21 @@ type InvoiceFormProps = {
 const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
   const [data, setData] = useState(() => ({
     id: initialData.id ?? "",
-    creation: (initialData.creation && isoDate(initialData.creation)) ?? "",
+    creation:
+      (initialData.creation &&
+        shortDate.format(isoDate.parse(initialData.creation))) ??
+      "",
     client: initialData.client ?? "",
     amount: initialData.amount?.toString() ?? "",
     isPaid: initialData.isPaid ? "1" : "0",
   }));
 
+  console.log(data.creation, shortDate.parse(data.creation));
+
   const isValid = Boolean(
     data.id &&
       data.client &&
-      data.creation &&
+      shortDate.parse(data.creation).getTime() &&
       data.client &&
       data.amount &&
       parseFloat(data.amount)
@@ -34,7 +40,7 @@ const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
     onSubmit({
       id: data.id,
       client: data.client,
-      creation: data.creation,
+      creation: isoDate.format(shortDate.parse(data.creation)),
       amount: parseFloat(data.amount),
       isPaid: data.isPaid === "1",
     });
@@ -43,15 +49,16 @@ const InvoiceForm = ({ initialData, onSubmit, onCancel }: InvoiceFormProps) => {
   return (
     <InvoicePane isElevated onClose={onCancel}>
       <Input
-        autoFocus
-        type="date"
-        placeholder="Date"
+        type="text"
+        placeholder="dd/mm"
         value={data.creation}
         onChange={(event) =>
           setData((data) => ({ ...data, creation: event.target.value }))
         }
       />
-      <Cell aria-label="Id">{data.id?.substr(0, 7)}</Cell>
+      <Cell hideMobile aria-label="Id">
+        {data.id?.substr(0, 7)}
+      </Cell>
       <Input
         type="text"
         placeholder="Client"

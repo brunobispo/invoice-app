@@ -1,4 +1,5 @@
 import Button from "components/atoms/Button";
+import { Container } from "./style"
 
 function addMonths(date: Date, months: number) {
   const newDate = new Date(date.getTime());
@@ -12,7 +13,7 @@ type DateButtonProps = {
 };
 
 const DateButton = ({ date, onChange }: DateButtonProps) => (
-  <div>
+  <Container>
     <Button
       variant="secondary"
       isGroup
@@ -23,7 +24,7 @@ const DateButton = ({ date, onChange }: DateButtonProps) => (
       {"<"}
     </Button>
 
-    <Button variant="secondary" isGroup isCompact disabled>
+    <Button variant="secondary" isGroup isCompact isResponsive disabled>
       {date.toLocaleString("en-US", { month: "long", year: "numeric" })}
     </Button>
 
@@ -36,7 +37,7 @@ const DateButton = ({ date, onChange }: DateButtonProps) => (
     >
       {">"}
     </Button>
-  </div>
+  </Container>
 );
 
 export default DateButton;

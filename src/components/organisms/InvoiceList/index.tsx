@@ -28,7 +28,7 @@ const InvoiceList = ({
       {(items.length > 0 || creating) && (
         <Header aria-hidden>
           <Title>Date</Title>
-          <Title>Id</Title>
+          <Title hideMobile>Id</Title>
           <Title>Client</Title>
           <Title>Amount</Title>
           <Title>Status</Title>

@@ -6,13 +6,16 @@ import StatusText from "components/atoms/StatusText";
 import Cell from "components/atoms/Cell";
 import InvoicePane from "components/molecules/InvoicePane";
 import InvoiceMenu from "components/molecules/InvoiceMenu";
-import date from "helpers/date";
+import * as date from "helpers/date";
+import * as isoDate from "helpers/isoDate";
 import { RootState } from "state/store";
 
 const InvoiceItem = ({ creation, id, client, amount, isPaid }: InvoiceType) => (
   <InvoicePane>
-    <Cell aria-label="Date">{date(creation)}</Cell>
-    <Cell aria-label="Id">{id.substr(0, 7)}</Cell>
+    <Cell aria-label="Date">{date.format(isoDate.parse(creation))}</Cell>
+    <Cell aria-label="Id" hideMobile>
+      {id.substr(0, 7)}
+    </Cell>
     <Cell aria-label="Client">{client}</Cell>
     <Cell aria-label="Amount">
       <AmountText amount={amount} />

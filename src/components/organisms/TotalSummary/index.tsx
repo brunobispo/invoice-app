@@ -15,7 +15,7 @@ const TotalSummary = ({
   refunded,
 }: TotalSummaryProps) => (
   <Container>
-    <Item>
+    <Item isFeatured>
       <Title id="summary-total">Total Received</Title>
       <Value isFeatured aria-describedby="summary-total">
         <AmountText amount={total} />

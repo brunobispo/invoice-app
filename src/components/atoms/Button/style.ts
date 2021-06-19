@@ -5,10 +5,13 @@ export const Container = styled.button<{
   isGroup: boolean;
   variant: "primary" | "secondary";
   isCompact: boolean;
+  isResponsive: boolean;
 }>`
   border-radius: ${({ theme }) => theme.borderRadius};
   border: 0;
+  margin: 0;
   font-family: inherit;
+  font-size: 14px;
   padding: 10px ${({ isCompact }) => (isCompact ? "10px" : "20px")};
   font-weight: 500;
 
@@ -47,6 +50,14 @@ export const Container = styled.button<{
       :not(:last-child) {
         border-bottom-right-radius: 0;
         border-top-right-radius: 0;
+      }
+    `}
+
+  ${({ isResponsive }) =>
+    isResponsive &&
+    css`
+      @media screen and (max-width: ${({ theme }) => theme.mobileBreakpoint}) {
+        flex: 1;
       }
     `}
 `;

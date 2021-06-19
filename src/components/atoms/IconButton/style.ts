@@ -7,8 +7,10 @@ export const Container = styled.button`
   border: 0;
   background: none;
   padding: 0;
-  width: 15px;
+  width: 25px;
+  height: 25px;
   display: inline-flex;
+  align-items: center;
 
   :hover {
     opacity: 0.5;

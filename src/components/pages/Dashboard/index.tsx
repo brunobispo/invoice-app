@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Section from "components/atoms/Section";
 import DateButton from "components/molecules/DateButton";
-import Button from "components/atoms/Button";
+import CreateButton from "components/molecules/CreateButton";
 import InvoiceList from "components/organisms/InvoiceList";
 import TotalSummary from "components/organisms/TotalSummary";
 import { InvoiceType } from "types";
@@ -16,7 +16,7 @@ import {
 } from "state/dashboard/selectors";
 import { setCurrentMonth } from "state/dashboard";
 import { newInvoice } from "state/invoices";
-import isoDate from "helpers/isoDate";
+import * as isoDate from "helpers/isoDate";
 
 type DashboardProps = {
   total: number;
@@ -51,11 +51,7 @@ const Dashboard = ({
         refunded={refunded}
       />
     </Section>
-    <Section alignItems="right">
-      <Button onClick={() => onCreateInvoice(currentMonth)}>
-        + Create Invoice
-      </Button>
-    </Section>
+    <CreateButton onClick={() => onCreateInvoice(currentMonth)} />
     <Section>
       <InvoiceList items={items} />
     </Section>
@@ -74,7 +70,7 @@ const mapStateToProps = (state: RootState) => ({
 const mapDispatchToProps = (dispatch: AppDispatch) => ({
   onChangeMonth: (date: Date) => dispatch(setCurrentMonth(date)),
   onCreateInvoice: (date: Date) =>
-    dispatch(newInvoice({ creation: isoDate(date.toISOString()) })),
+    dispatch(newInvoice({ creation: isoDate.format(date) })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

@@ -8,6 +8,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
   isGroup?: boolean;
   isCompact?: boolean;
   variant?: "primary" | "secondary";
+  isResponsive?: boolean;
 };
 
 const Button = ({
@@ -17,6 +18,7 @@ const Button = ({
   isGroup = false,
   isCompact = false,
   variant = "primary",
+  isResponsive = false,
   disabled,
   ...props
 }: ButtonProps) => (
@@ -27,6 +29,7 @@ const Button = ({
     variant={variant}
     disabled={disabled}
     isCompact={isCompact}
+    isResponsive={isResponsive}
     {...props}
   >
     {children}

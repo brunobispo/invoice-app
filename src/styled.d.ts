@@ -11,5 +11,6 @@ declare module "styled-components" {
     refundedColor: string;
     pendingColor: string;
     boxShadow: string;
+    mobileBreakpoint: string;
   }
 }

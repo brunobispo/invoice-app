@@ -1,4 +1,6 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
+
+const breakpoint = "600px";
 
 export const Container = styled.ul`
   background: ${({ theme }) => theme.paperColor};
@@ -7,13 +9,25 @@ export const Container = styled.ul`
   align-items: center;
   padding: 25px;
   margin: 0;
+
+  @media screen and (max-width: ${breakpoint}) {
+    flex-wrap: wrap;
+  }
 `;
 
-export const Item = styled.li`
+export const Item = styled.li<{ isFeatured?: boolean }>`
   flex: 1;
   padding: 0 10px;
   list-style: none;
   text-align: center;
+
+  ${({ isFeatured }) =>
+    isFeatured &&
+    css`
+      @media screen and (max-width: ${breakpoint}) {
+        flex: 100%;
+      }
+    `}
 `;
 
 export const Title = styled.h3`
@@ -35,4 +49,12 @@ export const Value = styled.span<{
           refunded: theme.refundedColor,
         }[variant]
       : "inherit"};
+
+  ${({ isFeatured }) =>
+    !isFeatured &&
+    css`
+      @media screen and (max-width: ${breakpoint}) {
+        font-size: 18px;
+      }
+    `}
 `;

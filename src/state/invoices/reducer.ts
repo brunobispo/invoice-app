@@ -9,7 +9,7 @@ import {
   refundInvoice,
   saveInvoice,
 } from "./actions";
-import isoDate from "helpers/isoDate";
+import * as isoDate from "helpers/isoDate";
 
 type InvoicesState = {
   list: { [key: string]: InvoiceType };
@@ -19,21 +19,21 @@ type InvoicesState = {
 
 const items = [
   {
-    creation: isoDate(new Date().toISOString()),
+    creation: isoDate.format(new Date()),
     client: "Bruno Bispo",
     id: "bf67e1af6346e6a15318553a35d3a828941d552d",
     amount: 23.32,
     isPaid: false,
   },
   {
-    creation: isoDate(new Date().toISOString()),
+    creation: isoDate.format(new Date()),
     client: "Bruno Bispo",
     id: "cf67e1af6346e6a15318553a35d3a828941d552d",
     amount: 23.32,
     isPaid: true,
   },
   {
-    creation: isoDate(new Date().toISOString()),
+    creation: isoDate.format(new Date()),
     client: "Bruno Bispo",
     id: "ff67e1af6346e6a15318553a35d3a828941d552d",
     amount: -23.32,

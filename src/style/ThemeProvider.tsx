@@ -11,6 +11,7 @@ const theme = {
   refundedColor: "#B30000",
   pendingColor: "#B8B8B8",
   boxShadow: "2px 2px 10px rgba(0, 0, 0, 0.1)",
+  mobileBreakpoint: "425px",
 };
 
 type ThemeProviderProps = {
