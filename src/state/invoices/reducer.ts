@@ -9,7 +9,7 @@ import {
   refundInvoice,
   saveInvoice,
 } from "./actions";
-import * as isoDate from "helpers/isoDate";
+import invoices from "mocks/invoices";
 
 type InvoicesState = {
   list: { [key: string]: InvoiceType };
@@ -17,35 +17,8 @@ type InvoicesState = {
   editingId: InvoiceType["id"] | null;
 };
 
-const items = [
-  {
-    creation: isoDate.format(new Date()),
-    client: "Bruno Bispo",
-    id: "bf67e1af6346e6a15318553a35d3a828941d552d",
-    amount: 23.32,
-    isPaid: false,
-  },
-  {
-    creation: isoDate.format(new Date()),
-    client: "Bruno Bispo",
-    id: "cf67e1af6346e6a15318553a35d3a828941d552d",
-    amount: 23.32,
-    isPaid: true,
-  },
-  {
-    creation: isoDate.format(new Date()),
-    client: "Bruno Bispo",
-    id: "ff67e1af6346e6a15318553a35d3a828941d552d",
-    amount: -23.32,
-    isPaid: true,
-  },
-];
-
 const initialState: InvoicesState = {
-  list: items.reduce<InvoicesState["list"]>((map, item) => {
-    map[item.id] = item;
-    return map;
-  }, {}),
+  list: invoices,
   editingId: null,
   creating: null,
 };
